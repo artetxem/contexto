@@ -1,0 +1,1 @@
+The software in this directory is part of bootstrap-select (https://silviomoreto.github.io/bootstrap-select/).

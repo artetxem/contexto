@@ -1,0 +1,13 @@
+/core-library/target/
+/web-app/target/
+
+/data/
+/models/
+/private/
+/training/third-party/fast_align/
+
+*~
+.DS_Store
+__pycache__/
+*.py[cod]
+*$py.class

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Copyright (C) 2017  Mikel Artetxe <artetxem@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ "$#" -ne 5 ]; then
+    echo "USAGE: build-model src.txt trg.txt src.tok.txt trg.tok.txt src2trg.align.txt"
+    exit 1
+fi
+
+SRC=$1
+TRG=$2
+SRC_TOK=$3
+TRG_TOK=$4
+SRC2TRG=$5
+
+python3 $DIR/extract_phrases.py $SRC $TRG $SRC_TOK $TRG_TOK $SRC2TRG | LC_ALL=C sort | python3 $DIR/merge_sorted.py | java -jar $DIR/../core-library/target/core-library-1.0-SNAPSHOT.jar $SRC $TRG
